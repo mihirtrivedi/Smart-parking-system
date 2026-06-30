@@ -1,4 +1,7 @@
-FROM node:18-alpine
+FROM node:18-slim
+
+# Install OpenSSL for Prisma compatibility
+RUN apt-get update -y && apt-get install -y openssl
 
 WORKDIR /usr/src/app
 
@@ -14,12 +17,9 @@ COPY src ./src
 COPY prisma ./prisma
 COPY public ./public
 
-# Generate Prisma Client
-RUN npx prisma generate
-
-# Build typescript code
-RUN npx tsc
+# Build project, push DB, and seed
+RUN npm run build
 
 # Set port and start command
 EXPOSE 3000
-CMD ["node", "dist/server.js"]
+CMD ["npm", "start"]
