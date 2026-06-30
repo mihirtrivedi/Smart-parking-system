@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Parking Lot Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+    
+    <div class="dashboard-container">
+        <header>
+            <h1>Smart Parking <span>Hub</span></h1>
+            <p>Real-time vehicle management and AI assistance.</p>
+        </header>
+
+        <main class="grid-layout">
+            <!-- Availability Widget -->
+            <section class="glass-card widget availability-widget">
+                <h2>Spot Availability</h2>
+                <div class="spots-grid">
+                    <div class="spot-card small">
+                        <h3>SMALL</h3>
+                        <p class="count" id="count-small">0</p>
+                        <span>Motorcycle</span>
+                    </div>
+                    <div class="spot-card medium">
+                        <h3>MEDIUM</h3>
+                        <p class="count" id="count-medium">0</p>
+                        <span>Car / Moto</span>
+                    </div>
+                    <div class="spot-card large">
+                        <h3>LARGE</h3>
+                        <p class="count" id="count-large">0</p>
+                        <span>Bus / Car / Moto</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Actions Panel -->
+            <section class="glass-card widget actions-widget">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="checkin">Check-In</button>
+                    <button class="tab-btn" data-tab="checkout">Check-Out</button>
+                </div>
+                
+                <div class="tab-content active" id="tab-checkin">
+                    <form id="form-checkin">
+                        <div class="form-group">
+                            <label>License Plate</label>
+                            <input type="text" id="ci-plate" placeholder="e.g. ABC-1234" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Vehicle Type</label>
+                            <select id="ci-type">
+                                <option value="MOTORCYCLE">Motorcycle</option>
+                                <option value="CAR">Car</option>
+                                <option value="BUS">Bus</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn primary-btn">Allocate Spot</button>
+                    </form>
+                    <div id="ci-result" class="result-message"></div>
+                </div>
+
+                <div class="tab-content" id="tab-checkout">
+                    <form id="form-checkout">
+                        <div class="form-group">
+                            <label>Ticket ID</label>
+                            <input type="text" id="co-ticket" placeholder="Enter Ticket UUID" required>
+                        </div>
+                        <button type="submit" class="btn primary-btn">Process Exit</button>
+                    </form>
+                    <div id="co-result" class="result-message"></div>
+                </div>
+            </section>
+
+            <!-- AI Assistant -->
+            <section class="glass-card widget ai-widget">
+                <h2>Parking AI Assistant</h2>
+                <div class="chat-window" id="chat-window">
+                    <div class="message ai">Hello! I'm your AI parking assistant. Ask me anything about availability or parking rules!</div>
+                </div>
+                <form id="form-ai" class="chat-input-area">
+                    <input type="text" id="ai-query" placeholder="Ask a question..." required autocomplete="off">
+                    <button type="submit" class="btn icon-btn">➤</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

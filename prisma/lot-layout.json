@@ -1,0 +1,9 @@
+{
+  "floors": 3,
+  "spotsPerFloor": 30,
+  "distribution": {
+    "SMALL": 10,
+    "MEDIUM": 10,
+    "LARGE": 10
+  }
+}

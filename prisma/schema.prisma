@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model ParkingSpot {
+  id           String   @id @default(uuid())
+  floorNumber  Int
+  spotNumber   Int
+  spotType     String   // SMALL, MEDIUM, LARGE
+  status       String   @default("AVAILABLE") // AVAILABLE, OCCUPIED, OUT_OF_SERVICE
+  version      Int      @default(0)
+
+  tickets      Ticket[]
+}
+
+model Vehicle {
+  licensePlate String   @id
+  vehicleType  String   // MOTORCYCLE, CAR, BUS
+
+  tickets      Ticket[]
+}
+
+model Ticket {
+  id           String    @id @default(uuid())
+  licensePlate String
+  spotId       String
+  entryTime    DateTime  @default(now())
+  exitTime     DateTime?
+  status       String    @default("ACTIVE") // ACTIVE, COMPLETED
+  fee          Float?
+
+  vehicle      Vehicle     @relation(fields: [licensePlate], references: [licensePlate])
+  spot         ParkingSpot @relation(fields: [spotId], references: [id])
+}
